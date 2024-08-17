@@ -1,5 +1,6 @@
 package com.example.cep.controller;
 
+import com.example.cep.component.GeradorDeArquivo;
 import com.example.cep.dto.Endereco;
 import com.google.gson.Gson;
 import jakarta.validation.Valid;
@@ -35,6 +36,8 @@ public class Controller {
 
             if (response.statusCode() == 200) {
                 endereco = new Gson().fromJson(response.body(), Endereco.class);
+                GeradorDeArquivo geradorDeArquivo = new GeradorDeArquivo();
+                geradorDeArquivo.salvaArquivo(endereco);
             } else {
                 throw new RuntimeException("erro na busca do cep, código de erro : " + response.statusCode());
             }
